@@ -1,13 +1,22 @@
 version: "3.9"
 
 services:
+  endpoint:
+    container_name: endpoint
+    build: ./endpoint/
+    image: endpoint
+
+    ports:
+      - "80:80"
+    networks:
+      - "internal_microservice"
+
+    restart: on-failure
+
   front:
     container_name: front
     build: ./front/
     image: front
-
-    ports:
-      - "3000:3000"
 
     networks:
       - "internal_microservice"
@@ -84,6 +93,8 @@ services:
 
 networks:
   internal_microservice:
+    driver: bridge
+    name: 'internal_microservice'
 
 volumes:
   database:

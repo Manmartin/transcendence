@@ -2,7 +2,7 @@
 
 FROM python:3.9-alpine AS builder
 
-EXPOSE 3000
+EXPOSE  80
 
 WORKDIR /app 
 
@@ -18,4 +18,4 @@ COPY . /app
 
 ENTRYPOINT ["python3"] 
 
-CMD ["manage.py", "runserver", "0.0.0.0:3000"]
+CMD ["manage.py", "runserver", "0.0.0.0:80"]
