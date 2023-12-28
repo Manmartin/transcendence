@@ -1,15 +1,28 @@
-version: "3.7"
+version: "3.9"
 
 services:
   front:
+    container_name: front
     build: ./front/
+    image: front
+
     ports:
       - "3000:3000"
+
+    networks:
+      - "internal_microservice"
+
+    environment:
+      LOGIN_42: ${LOGIN_42}
+
+    restart: on-failure
 
   game:
     build: ./game/
     ports:
       - "8083:8080"
+    networks:
+      - "internal_microservice"
 
   login:
     build: ./login/
@@ -24,6 +37,8 @@ services:
     build: ./matchmaking/
     ports:
       - "8084:8080"
+    networks:
+      - "internal_microservice"
 
   users:
     build: ./users/

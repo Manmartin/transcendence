@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.4
 
-FROM python AS builder
+FROM python:3.9-alpine AS builder
 
 EXPOSE 3000
 
@@ -8,9 +8,9 @@ WORKDIR /app
 
 COPY requirements.txt /app
 
-RUN apt-get update
+RUN apk update
 
-RUN apt-get install git
+RUN apk add git
 
 RUN pip3 install -r requirements.txt --no-cache-dir
 
