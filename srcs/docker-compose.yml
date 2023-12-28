@@ -76,16 +76,17 @@ services:
 
   database:
     container_name: database
-    build: ./postgresql/
+    build: ./database/
     image: database
+    # dev only port. DELETE it on release
     ports:
       - '5432:5432'
     networks:
       - "internal_microservice"
     environment:
-      POSTGRES_DB: 'pong'
-      POSTGRES_USER: 'postgres'
-      POSTGRES_PASSWORD: 'postgres' # TODO: get from env
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
 
       #    # Data persistance commented for development purposes
       #    volumes:
